@@ -2,17 +2,13 @@ SELECT
     id AS payment_id,
     orderid AS order_id,
     paymentmethod AS payment_method,
-    CASE
-        WHEN paymentmethod IN ('stripe', 'paypal', 'credit_card', 'gift_card')
-        THEN 'credit'
-        ELSE 'cash'
-    END AS payment_type,
     status,
     amount,
+    created AS created_date,
     CASE
-        WHEN status = 'success'
-        THEN TRUE
-        ELSE FALSE
-    END AS is_payment_completed,
-    created AS created_date
-from {{ source('stripe', 'payment') }}
+        WHEN paymentmethod IN ('stripe', 'paypal', 'credit_card', 'gift_card')
+            THEN 'credit'
+        ELSE 'cash'
+    END AS payment_type,
+    coalesce(status = 'success', FALSE) AS is_payment_completed
+FROM {{ source('stripe', 'payment') }}
