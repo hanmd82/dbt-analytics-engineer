@@ -37,5 +37,5 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 models:
   dbt_analytics_engineer:
-    staging:
-      materialized: view
+    base:
+      +materialized: view
