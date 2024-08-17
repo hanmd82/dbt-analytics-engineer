@@ -1,5 +1,5 @@
 WITH order_payments AS (
-    SELECT * FROM {{ref('base_stripe_order_payments') }}
+    SELECT * FROM {{ ref('base_stripe_order_payments') }}
 )
 
 SELECT
