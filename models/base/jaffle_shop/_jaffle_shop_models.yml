@@ -4,3 +4,31 @@ models:
   - name: base_jaffle_shop_customers
     config:
       materialized: view
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+
+  - name: base_jaffle_shop_orders
+    config:
+      materialized: view
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: status
+        tests:
+          - accepted_values:
+              values:
+                - completed
+                - shipped
+                - returned
+                - placed
+                - return_pending
+      - name: customer_id
+        tests:
+          - relationships:
+              field: customer_id
+              to: ref('base_jaffle_shop_customers')
