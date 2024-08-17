@@ -15,4 +15,4 @@ SELECT
         ELSE FALSE
     END AS is_payment_completed,
     created AS created_date
-from `dbt-tutorial.stripe.payment`
+from {{ source('stripe', 'payment') }}
