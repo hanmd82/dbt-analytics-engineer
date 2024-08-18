@@ -8,7 +8,7 @@ sources:
       - name: customers
         columns:
           - name: id
-            tests:
+            data_tests:
               - unique
               - not_null
       - name: orders
@@ -22,11 +22,11 @@ sources:
             period: hour
         columns:
           - name: id
-            tests:
+            data_tests:
               - unique
               - not_null
           - name: status
-            tests:
+            data_tests:
               - accepted_values:
                   values:
                     - completed
