@@ -1,5 +1,5 @@
 {# declaration of payment_types variable. Add here if a new one appears #}
-{%- set payment_types = ['cash', 'credit'] -%}
+{%- set payment_types = get_payment_types() -%}
 
 WITH payments AS (
     SELECT * FROM {{ ref('base_stripe_order_payments') }}
